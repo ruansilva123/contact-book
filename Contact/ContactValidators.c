@@ -1,0 +1,1 @@
+// funções para realização de validações de contatos
