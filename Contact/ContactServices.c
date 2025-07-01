@@ -41,9 +41,7 @@ void searchContactByName(Contact *contacts, int totalContacts){
 }
 
 void registerContact(Contact **contacts, int *totalContacts, int *counterId){
-    if (*totalContacts != 0) {
-        *contacts = realloc(*contacts, ((*totalContacts) + 1) * sizeof(Contact));
-    }
+    *contacts = realloc(*contacts, ((*totalContacts) + 1) * sizeof(Contact));
     
     (*totalContacts)++;
     (*contacts)[*totalContacts - 1].id = ++(*counterId);
@@ -102,7 +100,6 @@ void editContact(Contact *contacts, int totalContacts){
 
             } while (typeNumberOption != 1 && typeNumberOption != 2);
 
-            printf("Contact updated successfully.");
             return;
         }
     }
@@ -110,6 +107,29 @@ void editContact(Contact *contacts, int totalContacts){
     printf("Contact ID not found.");
 }
 
-void deleteContact(){
-    printf("delete");
+void deleteContact(Contact **contacts, int *totalContacts){
+    if (*totalContacts == 0) {
+        printf("No contacts to delete.");
+        return;
+    }
+
+    int contactId;
+
+    printf("Write the ID of the contact to be deleted:\n");
+    scanf("%d", &contactId);
+
+    for (int i = 0; i < *totalContacts; i++) {
+        if (contactId == (*contacts)[i].id) {
+            for (int j = i; j < *totalContacts - 1; j++) {
+                (*contacts)[j] = (*contacts)[j + 1];
+            }
+
+            *contacts = realloc(*contacts, (*totalContacts - 1) * sizeof(Contact));
+
+            (*totalContacts)--;
+            return;
+        }
+    }
+
+    printf("Contact ID not found.");
 }

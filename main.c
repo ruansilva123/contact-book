@@ -15,13 +15,12 @@ int main(){
         scanf("%d", &menuOption);
         while (getchar() != '\n');
 
-
         switch (menuOption) {
             case 1: showAllContacts(contacts, totalContacts); break;
             case 2: searchContactByName(contacts, totalContacts); break;
             case 3: registerContact(&contacts, &totalContacts, &counterId); break;
             case 4: editContact(contacts, totalContacts); break;
-            case 5: deleteContact(); break;
+            case 5: deleteContact(&contacts, &totalContacts); break;
             case 0: printf("Loggin out...\n"); break;
             default: printf("Invalid Option.\n");
         }
