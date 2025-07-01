@@ -21,31 +21,23 @@ void showAllContacts(Contact *contacts, int totalContacts){
 
 void searchContactByName(Contact *contacts, int totalContacts){
     char name[100];
-    Contact searchContact;
-    searchContact.id = -1;
 
     printf("Write the name of contact:\n");
     fgets(name, sizeof(name), stdin);
     
     for (int i = 0; i < totalContacts; i++) {
         if (strcmp(contacts[i].name, name) == 0) {
-            searchContact.id = contacts[i].id;
-            strcpy(searchContact.name, contacts[i].name);
-            strcpy(searchContact.phone, contacts[i].phone);
-            searchContact.isPersonal = contacts[i].isPersonal;
+            printf("ID: %d | Name: %s | Phone: %s | Type: %s",
+                contacts[i].id,
+                contacts[i].name,
+                contacts[i].phone,
+                contacts[i].isPersonal ? "Personal" : "Work"
+            );
+            return;
         }
     }
 
-    if (searchContact.id != -1) {
-        printf("ID: %d | Name: %s | Phone: %s | Type: %s",
-            searchContact.id,
-            searchContact.name,
-            searchContact.phone,
-            searchContact.isPersonal ? "Personal" : "Work"
-        );
-    } else {
-        printf("Contact not found.");
-    }
+    printf("Contact not found.");
 }
 
 void registerContact(Contact **contacts, int *totalContacts, int *counterId){
@@ -79,8 +71,43 @@ void registerContact(Contact **contacts, int *totalContacts, int *counterId){
     } while (typeNumberOption != 1 && typeNumberOption != 2);
 }
 
-void editContact(){
-    printf("edit");
+void editContact(Contact *contacts, int totalContacts){
+    int id;
+
+    printf("Write de ID of the contact to edit:\n");
+    scanf("%d", &id);
+    while (getchar() != '\n');
+
+    for (int i; i < totalContacts; i++) {
+        if (id == contacts[i].id) {
+            printf("Write the number: (Ex: +55(47)999999999)\n");
+            fgets(contacts[i].phone, sizeof(contacts[i].phone), stdin);
+
+            printf("Write the contact name:\n");
+            fgets(contacts[i].name, sizeof(contacts[i].name), stdin);
+
+            int typeNumberOption = 1;
+
+            do{
+                printf("Select the type of number:\n");
+                printf("[1] - Personal.\n");
+                printf("[2] - Work.");
+                scanf("%d", &typeNumberOption);
+
+                switch (typeNumberOption) {
+                    case 1: contacts[i].isPersonal = 1; break;
+                    case 2: contacts[i].isPersonal = 0; break;
+                    default: printf("Invalid Option.\n");
+                }
+
+            } while (typeNumberOption != 1 && typeNumberOption != 2);
+
+            printf("Contact updated successfully.");
+            return;
+        }
+    }
+
+    printf("Contact ID not found.");
 }
 
 void deleteContact(){
