@@ -8,7 +8,7 @@ The project was created in C for the final assignment of the **Algorithms class 
 - Search a contact by name
 - Register a new contact
 - Edit a contact
-- Delete a contac
+- Delete a contact
 
 ## :bar_chart: About data savings
 
