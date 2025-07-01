@@ -48,6 +48,7 @@ void registerContact(Contact **contacts, int *totalContacts, int *counterId){
 
     printf("Write the number: (Ex: +55(47)999999999)\n");
     fgets((*contacts)[*totalContacts - 1].phone, sizeof((*contacts)[*totalContacts - 1].phone), stdin);
+    
 
     printf("Write the contact name:\n");
     fgets((*contacts)[*totalContacts - 1].name, sizeof((*contacts)[*totalContacts - 1].name), stdin);
@@ -57,7 +58,7 @@ void registerContact(Contact **contacts, int *totalContacts, int *counterId){
     do{
         printf("Select the type of number:\n");
         printf("[1] - Personal.\n");
-        printf("[2] - Work.");
+        printf("[2] - Work.\n");
         scanf("%d", &typeNumberOption);
 
         switch (typeNumberOption) {
@@ -89,7 +90,7 @@ void editContact(Contact *contacts, int totalContacts){
             do{
                 printf("Select the type of number:\n");
                 printf("[1] - Personal.\n");
-                printf("[2] - Work.");
+                printf("[2] - Work.\n");
                 scanf("%d", &typeNumberOption);
 
                 switch (typeNumberOption) {
