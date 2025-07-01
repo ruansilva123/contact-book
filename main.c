@@ -18,7 +18,7 @@ int main(){
 
         switch (menuOption) {
             case 1: showAllContacts(contacts, totalContacts); break;
-            case 2: searchContact(); break;
+            case 2: searchContactByName(contacts, totalContacts); break;
             case 3: registerContact(&contacts, &totalContacts, &counterId); break;
             case 4: editContact(); break;
             case 5: deleteContact(); break;

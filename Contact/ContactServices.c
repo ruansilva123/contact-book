@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Contact.h"
 
 void showAllContacts(Contact *contacts, int totalContacts){
@@ -18,15 +19,40 @@ void showAllContacts(Contact *contacts, int totalContacts){
     }
 }
 
-void searchContact(){
-    printf("searth contact");
+void searchContactByName(Contact *contacts, int totalContacts){
+    char name[100];
+    Contact searchContact;
+    searchContact.id = -1;
+
+    printf("Write the name of contact:\n");
+    fgets(name, sizeof(name), stdin);
+    
+    for (int i = 0; i < totalContacts; i++) {
+        if (strcmp(contacts[i].name, name) == 0) {
+            searchContact.id = contacts[i].id;
+            strcpy(searchContact.name, contacts[i].name);
+            strcpy(searchContact.phone, contacts[i].phone);
+            searchContact.isPersonal = contacts[i].isPersonal;
+        }
+    }
+
+    if (searchContact.id != -1) {
+        printf("ID: %d | Name: %s | Phone: %s | Type: %s",
+            searchContact.id,
+            searchContact.name,
+            searchContact.phone,
+            searchContact.isPersonal ? "Personal" : "Work"
+        );
+    } else {
+        printf("Contact not found.");
+    }
 }
 
 void registerContact(Contact **contacts, int *totalContacts, int *counterId){
     if (*totalContacts != 0) {
         *contacts = realloc(*contacts, ((*totalContacts) + 1) * sizeof(Contact));
     }
-
+    
     (*totalContacts)++;
     (*contacts)[*totalContacts - 1].id = ++(*counterId);
 
